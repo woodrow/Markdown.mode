@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE markdown [
+    <!ENTITY base-color                             "#090">
+    <!ENTITY base-inverted-color                    "#fff">
+    <!ENTITY base-font-weight                       "normal">
+    <!ENTITY base-font-style                        "normal">
+
+    <!ENTITY code-color                             "#090">
+    <!ENTITY code-inverted-color                    "#090">
+    <!ENTITY code-font-weight                       "normal">
+    <!ENTITY code-font-style                        "normal">
+
+    <!ENTITY major_header-color                     "#6C0540">
+    <!ENTITY major_header-inverted-color            "#6C0540">
+    <!ENTITY major_header-font-weight               "bold">
+    <!ENTITY major_header-font-style                "normal">
+
+    <!ENTITY minor_header-color                     "#002288">
+    <!ENTITY minor_header-inverted-color            "#002288">
+    <!ENTITY minor_header-font-weight               "bold">
+    <!ENTITY minor_header-font-style                "normal">
+
+    <!ENTITY horizontal_rule-color                  "#f96">
+    <!ENTITY horizontal_rule-inverted-color         "#f96">
+    <!ENTITY horizontal_rule-font-weight            "bold">
+    <!ENTITY horizontal_rule-font-style             "normal">
+
+    <!ENTITY emphasis-color                         "#f00">
+    <!ENTITY emphasis-inverted-color                "#f00">
+    <!ENTITY emphasis-font-weight                   "normal">
+    <!ENTITY emphasis-font-style                    "italic">
+
+    <!ENTITY strong-color                           "#00f">
+    <!ENTITY strong-inverted-color                  "#00f">
+    <!ENTITY strong-font-weight                     "bold">
+    <!ENTITY strong-font-style                      "normal">
+
+    <!ENTITY blockquote-color                       "#66f">
+    <!ENTITY blockquote-inverted-color              "#66f">
+    <!ENTITY blockquote-font-weight                 "normal">
+    <!ENTITY blockquote-font-style                  "normal">
+
+    <!ENTITY list-color                             "#600">
+    <!ENTITY list-inverted-color                    "#600">
+    <!ENTITY list-font-weight                       "normal">
+    <!ENTITY list-font-style                        "normal">
+
+    <!ENTITY list_item-color                        "#f00">
+    <!ENTITY list_item-inverted-color               "#f00">
+    <!ENTITY list_item-font-weight                  "bold">
+    <!ENTITY list_item-font-style                   "normal">
+
+    <!ENTITY link-color                             "#090">
+    <!ENTITY link-inverted-color                    "#090">
+    <!ENTITY link-font-weight                       "normal">
+    <!ENTITY link-font-style                        "normal">
+
+    <!ENTITY link_text-color                        "#000">
+    <!ENTITY link_text-inverted-color               "#fff">
+    <!ENTITY link_text-font-weight                  "normal">
+    <!ENTITY link_text-font-style                   "normal">
+
+    <!ENTITY link_id-color                          "#c0c">
+    <!ENTITY link_id-inverted-color                 "#c0c">
+    <!ENTITY link_id-font-weight                    "normal">
+    <!ENTITY link_id-font-style                     "normal">
+
+    <!ENTITY link_url-color                         "#00f">
+    <!ENTITY link_url-inverted-color                "#00f">
+    <!ENTITY link_url-font-weight                   "normal">
+    <!ENTITY link_url-font-style                    "normal">
+
+    <!ENTITY link_title-color                       "#f00">
+    <!ENTITY link_title-inverted-color              "#f00">
+    <!ENTITY link_title-font-weight                 "normal">
+    <!ENTITY link_title-font-style                  "normal">
+
+    <!ENTITY link_label-color                       "#090">
+    <!ENTITY link_label-inverted-color              "#090">
+    <!ENTITY link_label-font-weight                 "normal">
+    <!ENTITY link_label-font-style                  "normal">
+
+    <!ENTITY image-color                            "#c90">
+    <!ENTITY image-inverted-color                   "#c90">
+    <!ENTITY image-font-weight                      "bold">
+    <!ENTITY image-font-style                       "normal">
+]>
+
+<!-- GENERAL TODOs /////////////////////////////////////////////////////////////
+
+- turn inline code into a state to allow backtick-ing of HTML without disrupting syntax coloring state
+- check for escaped characters and avoid coloring?
+- solve (or ignore) block-in-blockquote and block-in-list problems
+- add states/keywords for the following Markdown features
+    + images
+    + links
+- add ENTITYs for Escape color
+- standardize id's for the various elements, similar to my last iteration.
+
+//////////////////////////////////////////////////////////////////////////// -->
+
+<syntax>
+    <head>
+        <name>Markdown-dev</name>
+        <charsintokens>
+            <![CDATA[_0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@]]>
+            <!-- <![CDATA[0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@\`*-_+#.!{}[]()]]> -->
+        </charsintokens>
+    </head>
+    <states>
+        <default id="Markdown_Base" color="&base-color;" inverted-color="&base-inverted-color;" font-weight="&base-font-weight;" font-style="&base-font-style;" casesensitive="no" useforautocomplete="no">
+
+<!--==== DEFAULT:KEYWORDS ===================================================-->
+
+
+<!--        Emphasis ========================================================-->
+            <keywords id="Emphasis" color="&emphasis-color;" inverted-color="&emphasis-inverted-color;" font-weight="&emphasis-font-weight;" font-style="&emphasis-font-style;" casesensitive="no" useforautocomplete="no">
+                <regex>(\_(?!\_).*?(?&lt;!\_)\_)</regex>
+                <regex>(\*(?!\*).*?(?&lt;!\*)\*)</regex>
+            </keywords>
+
+<!--        Strong ==========================================================-->
+            <keywords id="Strong" color="&strong-color;" inverted-color="&strong-inverted-color;" font-weight="&strong-font-weight;" font-style="&strong-font-style;" casesensitive="no" useforautocomplete="no">
+                <regex>(\_\_(?!\_).*?(?&lt;!\_)\_\_)</regex>
+                <regex>(\*\*(?!\*).*?(?&lt;!\*)\*\*)</regex>
+            </keywords>
+
+<!--        Strong Emphasis =================================================-->
+            <keywords id="Strong Emphasis" color="&emphasis-color;" inverted-color="&emphasis-inverted-color;" font-weight="&strong-font-weight;" font-style="&emphasis-font-style;" casesensitive="no" useforautocomplete="no">
+                <regex>(\_\_\*.*?\*\_\_)</regex>
+                <regex>(\*\_\_.*?\_\_\*)</regex>
+                <regex>(\_\*\*.*?\*\*\_)</regex>
+               <regex>(\*\*\_.*?\_\*\*)</regex>
+            </keywords>
+
+<!--        Inline Code =====================================================-->
+            <keywords id="Inline Code" color="&code-color;" inverted-color="&code-inverted-color;" font-weight="&code-font-weight;" font-style="&code-font-style;" casesensitive="no" useforautocomplete="no">
+                <regex>(\`[^\`]+\`)</regex>
+                <regex>(\`\`.*?\`\`)</regex>
+            </keywords>
+
+<!--        Escaped Characters ==============================================-->
+            <keywords id="Markdown_Escape Sequences" color="#f00" inverted-color="#f00" casesensitive="no">
+                <!-- why does this require <regex> and _NOT_ work with <string>? -->
+                <regex>(\\\\)</regex>
+                <regex>(\\\`)</regex>
+                <regex>(\\\*)</regex>
+                <regex>(\\\-)</regex>
+                <regex>(\\\_)</regex>
+                <regex>(\\\+)</regex>
+                <regex>(\\\#)</regex>
+                <regex>(\\\.)</regex>
+                <regex>(\\\!)</regex>
+                <regex>(\\\{)</regex>
+                <regex>(\\\})</regex>
+                <regex>(\\\[)</regex>
+                <regex>(\\\])</regex>
+                <regex>(\\\()</regex>
+                <regex>(\\\))</regex>
+            </keywords>
+
+<!--        Inline URLs =====================================================-->
+            <!--
+            The following two <keywords> blocks are adapted
+            from SubEthaEdit.app/Contents/Resources/Modes/Base.mode/
+            Contents/Resources/SyntaxDefinition.xml
+            -->
+            <keywords id="Markdown_Emails" color="#0000ff" inverted-color="#4939ff" font-weight="bold" casesensitive="no" type="url" uri-prefix="mailto:">
+                <regex>(?i)&lt;([A-Z0-9._%-]+@[A-Z0-9._%-]+\.[A-Z]{2,4})&gt;</regex>
+            </keywords>
+
+            <keywords id="Markdown_URLs" color="#0000ff" inverted-color="#4939ff" font-weight="bold" casesensitive="no" type="url">
+                <regex>&lt;([a-zA-Z0-9]+://(?:\p{Alnum}|\p{Punct}|[-\+&amp;@#/%=~_|$!:,.;])*(?:\?\S+)?[^})\]\s\.,])&gt;</regex>
+                <regex>(?i)&lt;(mailto:(?:\p{Alnum}|\p{Punct}|[._%-])+@(?:\p{Alnum}|\p{Punct}|[._%-])+\.[A-Z]{2,4})&gt;</regex>
+            </keywords>
+            <!--
+            End of adapted blocks from Base.mode
+            -->
+
+<!--==== DEFAULT:BLOCKS =====================================================-->
+
+<!--        Blockquote ======================================================-->
+            <state id="Blockquote" color="&blockquote-color;" inverted-color="&blockquote-inverted-color;" font-weight="&blockquote-font-weight;" font-style="&blockquote-font-style;" casesensitive="no" useforautocomplete="no">
+                <begin><regex>^&gt;</regex></begin>
+                <end><regex>[\r\n][\r\n]</regex></end>
+                <import state="Non-Blockquote Blocks"/> <!-- can't handle nested blockquotes -->
+                <import keywords-only="yes" />
+            </state>
+
+            <import state="Non-Blockquote Blocks"/>
+
+<!--==== NON-BLOCKQUOTE:BLOCKS ==============================================-->
+            <state id="Non-Blockquote Blocks" containerState="yes">
+
+<!--            Inline HTML =================================================-->
+                 <import mode="HTML"/>
+
+<!--            Code Blocks =================================================-->
+                <state id="Code Block" color="&code-color;" inverted-color="&code-inverted-color;" font-weight="&code-font-weight;" font-style="&code-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>(?: {4,}|\t+)</regex></begin>
+                    <end><regex>[\r\n]</regex></end>
+                </state>
+
+<!--            Horizontal Rules ============================================-->
+                <state id="Horizontal Rules" color="&horizontal_rule-color;" inverted-color="&horizontal_rule-inverted-color;" font-weight="&horizontal_rule-font-weight;" font-style="&horizontal_rule-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>^[ \t]*[-\*\_]+[ \t]*[-\*\_]+[ \t]*[-\*\_]+(?:[ \t]*[-\*\_]*)*(?=[\r\n])</regex></begin>
+                    <end><regex>[\r\n]</regex></end>
+                </state>
+
+<!--            Headers =====================================================-->
+                <state id="SeText Major Header" color="&major_header-color;" inverted-color="&major_header-inverted-color;" font-weight="&major_header-font-weight;" font-style="&major_header-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>^[^\r\n]+(?=[\r\n]=+[\r\n])</regex></begin>
+                    <end><regex>[\r\n]=+</regex></end>
+                </state>
+
+                <state id="SeText Subheader" color="&minor_header-color;" inverted-color="&minor_header-inverted-color;" font-weight="&minor_header-font-weight;" font-style="&minor_header-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>^[^\r\n]+(?=[\r\n]-+[\r\n])</regex></begin>
+                    <end><regex>[\r\n]-+</regex></end>
+                </state>
+
+                <state id="Atx Major Header" color="&major_header-color;" inverted-color="&major_header-inverted-color;" font-weight="&major_header-font-weight;" font-style="&major_header-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>^# </regex></begin>
+                    <end><regex>[\r\n]</regex></end>
+                </state>
+
+                <state id="Atx Subheader" color="&minor_header-color;" inverted-color="&minor_header-inverted-color;" font-weight="&minor_header-font-weight;" font-style="&minor_header-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>^#{2,} </regex></begin>
+                    <end><regex>[\r\n]</regex></end>
+                </state>
+
+<!--            Lists =======================================================-->
+                <state id="Ordered Lists" color="&list-color;" inverted-color="&list-inverted-color;" font-weight="&list-font-weight;" font-style="&list-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>^ {,3}\d+\.[ \t]+</regex></begin><!--.*?-->
+                    <end><regex>[\r\n]{2}(?! {4}|\t)</regex></end> <!-- related to "Blocks in List": <regex>(?&lt;=[\r\n])[\r\n](?! {4}|\t)</regex> -->
+                    <keywords id="Ordered List Item" color="&list_item-color;" inverted-color="&list_item-inverted-color;" font-weight="&list_item-font-weight;" font-style="&list_item-font-style;" casesensitive="no" useforautocomplete="no">
+                        <regex>(\d+\.)</regex> <!-- this should ideally be (\d+\.).*$ to match only the first numbered bullet, if Markdown were following its own spec. -->
+                    </keywords>
+                    <import keywords-only="yes" />
+
+<!-- currently broken                    <state id="Blocks in List">
+                        <begin><regex>^ {4}</regex></begin>
+                        <end><regex>[\r\n]</regex></end> <!-//-(?=[\r\n]{2}[^ {4}|\t])</regex></end>-//->
+                        <!-//- <import state="Code Block"/> -//->
+                        <!-//- <import state="Blockquote"/> -//->
+                    </state>
+-->
+                </state>
+                <state id="Unordered Lists" color="&list-color;" inverted-color="&list-inverted-color;" font-weight="&list-font-weight;" font-style="&list-font-style;" casesensitive="no" useforautocomplete="no">
+                    <begin><regex>^ {,3}[-\+\*][ \t]+</regex></begin> <!--.*?-->
+                    <end><regex>[\r\n]{2}(?! {4}|\t)</regex></end> <!-- related to "Blocks in List": <regex>(?&lt;=[\r\n])[\r\n](?! {4}|\t)</regex> -->
+                    <keywords id="Unordered List Item" color="&list_item-color;" inverted-color="&list_item-inverted-color;" font-weight="&list_item-font-weight;" font-style="&list_item-font-style;" casesensitive="no" useforautocomplete="no">
+                        <regex>([-\+\*]).*$</regex>
+                    </keywords>
+                    <import keywords-only="yes" />
+
+<!-- currently broken                    <state id="Blocks in List">
+                        <begin><regex>^ {4}</regex></begin>
+                        <end><regex>[\r\n]</regex></end> <!-//-(?=[\r\n]{2}[^ {4}|\t])</regex></end>-//->
+                        <!-//- <import state="Code Block"/> -//->
+                        <!-//- <import state="Blockquote"/> -//->
+                    </state>
+-->
+                </state>
+            </state>
+        </default>
+    </states>
+</syntax>

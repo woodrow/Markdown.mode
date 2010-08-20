@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbols>
+    <symbol id="H1" indentation="0" font-weight="bold">
+        <regex>^#{1} +(.*?)[ #]*$</regex>
+    </symbol>
+    <symbol id="H1_setext" indentation="0" font-weight="bold">
+        <regex>^([^\r\n]+)[\r\n]=+$</regex>
+    </symbol>
+    <symbol id="H2" indentation="1">
+        <regex>^#{2} +(.*?)[ #]*$</regex>
+    </symbol>
+    <symbol id="H2_setext" indentation="1">
+        <regex>^([^\r\n]+)[\r\n]-+$</regex>
+    </symbol>
+    <symbol id="H3" indentation="2">
+        <regex>^#{3} +(.*?)[ #]*$</regex>
+    </symbol>
+    <symbol id="H4" indentation="3">
+        <regex>^#{4} +(.*?)[ #]*$</regex>
+    </symbol>
+    <symbol id="H5" indentation="4">
+        <regex>^#{5} +(.*?)[ #]*$</regex>
+    </symbol>
+    <symbol id="H6" indentation="5">
+        <regex>^#{6} +(.*?)[ #]*$</regex>
+    </symbol>
+</symbols>
